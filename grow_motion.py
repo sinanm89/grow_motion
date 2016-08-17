@@ -62,7 +62,7 @@ while True:
             print e
             continue
         now = datetime.now().strftime('%s')
-	pic_name = '{time}_0{humidity}.jpg'.format(time=now, humidity=int(avg_humid_percentage*100)))
+	pic_name = '{time}_0{humidity}.jpg'.format(time=now, humidity=int(avg_humid_percentage*100))
 	camera.capture('{}/{}'.format(DIR_NAME, pic_name))
 	print 'took {}'.format(pic_name)
 	time.sleep(2*60)
