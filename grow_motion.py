@@ -58,10 +58,9 @@ def take_ambient_values():
     instance = DHT11(pin=DHT11_PIN)
     result = instance.read()
     if result.is_valid():
+        print("Last valid input: " + str(datetime.datetime.now()))
         print("Temperature: %d C" % result.temperature)
         print("Humidity: %d %%" % result.humidity)
-    else:
-        print("Error: %d" % result.error_code)
 
 
 def take_soil_values():
@@ -102,4 +101,5 @@ def take_soil_values():
 while True:
     take_soil_values()
     take_ambient_values()
+    print 'Sleeping for 2 minutes, see you soon ;)'
     time.sleep(2 * 60)
