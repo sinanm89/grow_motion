@@ -10,6 +10,26 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
 import picamera
+import dht11
+import RPi.GPIO as GPIO
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
+
+DHT11_PIN = 26
+
+def take_ambient_values():
+    
+    instance = dht11.DHT11(pin = DHT11_PIN)
+    result = instance.read()
+
+    if result.is_valid():
+        print("Temperature: %d C" % result.temperature)
+        print("Humidity: %d %%" % result.humidity)
+    else:
+        print("Error: %d" % result.error_code)
+         
 
 # Software SPI configuration #pin:
 CLK  = 18
@@ -65,4 +85,7 @@ while True:
 	pic_name = '{time}_0{humidity}.jpg'.format(time=now, humidity=int(avg_humid_percentage*100))
 	camera.capture('{}/{}'.format(DIR_NAME, pic_name))
 	print 'took {}'.format(pic_name)
+        take_ambient_values()
 	time.sleep(2*60)
+
+        
