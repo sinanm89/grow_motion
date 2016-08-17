@@ -84,18 +84,20 @@ def take_soil_values():
     # 361 / 423 = 0.8, so its pretty moist.
     avg_humid_percentage = float(avg_humid) / delta_wet
     time.sleep(0.5)
+    now = datetime.now().strftime('%s')
+    pic_name = '{time}_0{humidity}.jpg'.format(
+        time=now, humidity=int(avg_humid_percentage * 100))
+    trial = 'took'
     try:
-        camera = picamera.PiCamera()
+        with picamera.PiCamera() as camera:
+            camera.capture('{0}/{1}'.format(DIR_NAME, pic_name))
     except picamera.exc.PiCameraError:
         print 'camera borked, moving on.'
     except Exception, e:
         print 'WOW FATAL EXCEPTION'
+        trial = 'tried'
         print e
-    now = datetime.now().strftime('%s')
-    pic_name = '{time}_0{humidity}.jpg'.format(
-        time=now, humidity=int(avg_humid_percentage * 100))
-    camera.capture('{}/{}'.format(DIR_NAME, pic_name))
-    print 'took {}'.format(pic_name)
+    print '{0} {1}'.format(trial, pic_name)
 
 # main
 while True:
