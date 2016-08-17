@@ -89,19 +89,22 @@ def take_soil_values():
         camera = picamera.PiCamera()
     except picamera.exc.PiCameraError:
         print 'camera borked, moving on.'
-        continue
+        return False
     except Exception, e:
         print 'WOW FATAL EXCEPTION'
         print e
-        continue
+        return False
     now = datetime.now().strftime('%s')
     pic_name = '{time}_0{humidity}.jpg'.format(
         time=now, humidity=int(avg_humid_percentage * 100))
     camera.capture('{}/{}'.format(DIR_NAME, pic_name))
     print 'took {}'.format(pic_name)
+    return True
 
 # main
 while True:
-    take_soil_values()
+    success = take_soil_values()
+    if not success:
+        continue
     take_ambient_values()
     time.sleep(2 * 60)
