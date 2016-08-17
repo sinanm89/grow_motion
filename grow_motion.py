@@ -12,7 +12,7 @@ from datetime import datetime
 import Adafruit_MCP3008
 
 import picamera
-import dht11
+from dht11.dht11 import DHT11
 import RPi.GPIO as GPIO
 
 # for dht11 ambient setup
@@ -55,7 +55,7 @@ def take_ambient_values():
 
     The custom dht11 module is on git@github.com:sinanm89/DHT11_Python.git
     """
-    instance = dht11.DHT11(pin=DHT11_PIN)
+    instance = DHT11(pin=DHT11_PIN)
     result = instance.read()
     if result.is_valid():
         print("Temperature: %d C" % result.temperature)
@@ -89,22 +89,17 @@ def take_soil_values():
         camera = picamera.PiCamera()
     except picamera.exc.PiCameraError:
         print 'camera borked, moving on.'
-        return False
     except Exception, e:
         print 'WOW FATAL EXCEPTION'
         print e
-        return False
     now = datetime.now().strftime('%s')
     pic_name = '{time}_0{humidity}.jpg'.format(
         time=now, humidity=int(avg_humid_percentage * 100))
     camera.capture('{}/{}'.format(DIR_NAME, pic_name))
     print 'took {}'.format(pic_name)
-    return True
 
 # main
 while True:
-    success = take_soil_values()
-    if not success:
-        continue
+    take_soil_values()
     take_ambient_values()
     time.sleep(2 * 60)
