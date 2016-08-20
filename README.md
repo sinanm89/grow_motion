@@ -1,2 +1,2 @@
 # grow_motion
-control temperature and humidity in a growing medium
+take a picture of the plants current state and take moisture and temperature readings
