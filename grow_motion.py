@@ -21,7 +21,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
 
-DHT11_PIN = 26
+DHT11_PIN = 17
 
 # Software SPI configuration #pin:
 CLK = 18

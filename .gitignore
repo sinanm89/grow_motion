@@ -88,5 +88,9 @@ ENV/
 # Rope project settings
 .ropeproject
 
+<<<<<<< HEAD
+grow_motion/*
+=======
 grow_motion/
 dht11/
+>>>>>>> 1e5a20d31141b0760be01e5c76f93c672324a6a0
