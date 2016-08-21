@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python -u
 """
 Garden health measurement system.
 
@@ -92,6 +92,7 @@ def take_soil_values():
     trial = 'took'
     try:
         with picamera.PiCamera() as camera:
+            camera.vflip = True
             camera.capture('{0}/{1}'.format(DIR_NAME, pic_name))
     except picamera.exc.PiCameraError:
         print 'camera borked, moving on.'
