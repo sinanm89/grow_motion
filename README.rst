@@ -26,13 +26,17 @@ Usage assumes this line is executed before each command::
 
     export $PYTHONPATH='/home/pi/projects/grow_motion/'
 
-Data harvest::
+Data harvest
+------------
+Run the command::
 
     nohup python -u ~/projects/grow_motion/main.py >>/var/log/snn/grower.log 2>/var/log/snn/grower.err &
 
-Watch your data flow in now :)
+and watch your data flow in :)
 
-Images to Html5 video converter::
+Images to Html5 video converter
+-------------------------------
 
-    export $PYTHONPATH='/home/pi/projects/grow_motion/'
+Simply::
+
     python img_to_mp4.py
