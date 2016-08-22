@@ -1,0 +1,3 @@
+[submodule "DHT11_Python"]
+	path = DHT11_Python
+	url = git@github.com:sinanm89/DHT11_Python.git

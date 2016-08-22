@@ -89,5 +89,4 @@ ENV/
 .ropeproject
 
 grow_motion/
-dht11
 *.mp4

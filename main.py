@@ -16,7 +16,7 @@ from sqlalchemy.orm import sessionmaker
 import Adafruit_MCP3008
 
 import picamera
-from dht11.dht11 import DHT11
+from DHT11_Python.dht11 import DHT11
 import RPi.GPIO as GPIO
 
 from plants.models import Plant
