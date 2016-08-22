@@ -91,7 +91,7 @@ class LivingPlantView(object):
         instance = DHT11(pin=self.DHT11_PIN)
         result = instance.read()
         if result.is_valid():
-            print("Last valid input: " + str(datetime.datetime.now()))
+            print("Last valid input: " + str(datetime.now()))
             print("Temperature: %d C" % result.temperature)
             print("Humidity: %d %%" % result.humidity)
             return result.temperature, result.prime
