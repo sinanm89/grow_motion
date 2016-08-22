@@ -58,7 +58,7 @@ class LivingPlantView(object):
             print 'creating {} directory...'.format(self.DIR_NAME)
             os.makedirs(self.DIR_NAME)
 
-    def process_item(self, item, spider):
+    def process_item(self, item):
         """Save deals in the database.
 
         This method is called for every item pipeline component.
@@ -79,8 +79,17 @@ class LivingPlantView(object):
 
     def read_values(self):
         """Read all values from every sensor."""
-        self.take_soil_values()
-        self.take_ambient_values()
+        avg_humid_percentage, time = self.take_soil_values()
+        temperature, humidity = self.take_ambient_values()
+        data = dict(
+            measured_at=time,
+            name=datetime.fromtimestamp(time),
+            ambient_temperature=temperature or None,
+            ambient_humidity=float(humidity) or None,
+            soil_humidity=float(avg_humid_percentage)
+        )
+        item = self.process_item(data)
+        import ipdb; ipdb.set_trace()  # breakpoint e1a68ca1 //
 
     def take_ambient_values(self):
         """
@@ -139,6 +148,8 @@ class LivingPlantView(object):
             trial = 'tried'
             print e
         print '{0} {1}'.format(trial, pic_name)
+
+        return avg_humid_percentage, now
 
 
 def main():
