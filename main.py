@@ -1,4 +1,4 @@
-#! /usr/bin/python -u
+#! /usr/bin/python
 """
 Garden health measurement system.
 
@@ -48,12 +48,6 @@ class LivingPlantView(object):
         engine = sqlalchemy.create_engine(URL(**DATABASE))
         self.session = sessionmaker(bind=engine)
         self.model = Plant()
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.cleanup()
-
-        self.mcp = Adafruit_MCP3008.MCP3008(
-            clk=self.CLK, cs=self.CS, miso=self.MISO, mosi=self.MOSI)
 
         # Hardware SPI configuration:
         # SPI_PORT   = 0
@@ -110,6 +104,13 @@ class LivingPlantView(object):
         8 which is the number of inputs the physical chip has.
         """
         avg_humid = 0
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.cleanup()
+
+        self.mcp = Adafruit_MCP3008.MCP3008(
+            clk=self.CLK, cs=self.CS, miso=self.MISO, mosi=self.MOSI)
+
         for i in range(self.average_frequency):
             # Read all the ADC channel values in a list
             # The read_adc function will get the value of the channel (0-7)
