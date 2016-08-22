@@ -12,7 +12,6 @@ from datetime import datetime
 import sqlalchemy
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
-import imp
 
 import Adafruit_MCP3008
 
@@ -22,14 +21,6 @@ import RPi.GPIO as GPIO
 
 from models import Plant
 from local_settings import DATABASE
-cwd = os.getcwd()
-import ipdb; ipdb.set_trace()  # breakpoint 3f974186 //
-
-settings = imp.load_source(
-    'grow_motion.local_settings', os.path.join(cwd, "local_settings.py"))
-# models = imp.load_source(
-    # 'grow_motion.models', os.path.join(cwd, "models.py"))
-# Plant = models.Plant
 
 
 class LivingPlantView(object):
