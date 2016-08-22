@@ -90,3 +90,4 @@ ENV/
 
 grow_motion/
 *.mp4
+*-Archived
