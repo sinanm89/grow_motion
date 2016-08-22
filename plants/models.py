@@ -1,9 +1,7 @@
 """Plant information model."""
-from sqlalchemy import Column, Integer, String, Float, DateTime, MetaData
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Float, DateTime
 
-metadata = MetaData()
-Base = declarative_base(metadata=metadata)
+from generic_model import Base
 
 
 class Plant(Base):

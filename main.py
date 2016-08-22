@@ -19,7 +19,8 @@ import picamera
 from dht11.dht11 import DHT11
 import RPi.GPIO as GPIO
 
-from models import Plant
+from plants.models import Plant
+from generic_models import Base
 from local_settings import DATABASE
 
 
@@ -47,6 +48,8 @@ class LivingPlantView(object):
         """Create the LivingPlantView."""
         engine = sqlalchemy.create_engine(URL(**DATABASE))
         self.session = sessionmaker(bind=engine)
+        Base.metadata.create_all(engine)
+
         self.model = Plant()
 
         # Hardware SPI configuration:
