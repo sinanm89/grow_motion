@@ -86,11 +86,8 @@ class LivingPlantView(object):
 
     def read_values(self):
         """Read all values from every sensor."""
-        while True:
-            self.take_soil_values()
-            self.take_ambient_values()
-            print 'Sleeping for 2 minutes, see you soon ;)'
-            time.sleep(2 * 60)
+        self.take_soil_values()
+        self.take_ambient_values()
 
     def take_ambient_values(self):
         """
@@ -143,8 +140,14 @@ class LivingPlantView(object):
             print e
         print '{0} {1}'.format(trial, pic_name)
 
+
 def main():
+    """Main program."""
     plant = LivingPlantView()
+    while True:
+        plant.read_values()
+        print 'Sleeping for 2 minutes, see you soon ;)'
+        time.sleep(2 * 60)
 
 if __file__ == 'main':
     main()
