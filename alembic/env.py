@@ -18,8 +18,8 @@ fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from grow_motion.plants.models import Plant  # noqa
-target_metadata = Plant.Base.metadata
+from plants.models import Plant  # noqa
+target_metadata = Plant.metadata
 # target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
