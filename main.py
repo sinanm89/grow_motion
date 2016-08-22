@@ -10,18 +10,22 @@ import os
 from datetime import datetime
 
 import sqlalchemy
-import local_settings as settings
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
-from models import Plant
+import imp
 
-# Import SPI library (for hardware SPI) and MCP3008 library.
-# import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
 import picamera
 from dht11.dht11 import DHT11
 import RPi.GPIO as GPIO
+
+cwd = os.getcwd()
+settings = imp.load_source(
+    'grow_motion.local_settings', os.path.join(cwd, "local_settings.py"))
+models = imp.load_source(
+    'grow_motion.models', os.path.join(cwd, "models.py"))
+Plant = models.Plant
 
 
 class LivingPlantView(object):
