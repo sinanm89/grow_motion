@@ -92,7 +92,6 @@ class LivingPlantView(object):
             soil_humidity=float(avg_humid_percentage)
         )
         item = self.process_item(data)
-        import ipdb; ipdb.set_trace()  # breakpoint e1a68ca1 //
 
     def take_ambient_values(self):
         """
