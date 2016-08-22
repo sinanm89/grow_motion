@@ -149,5 +149,5 @@ def main():
         print 'Sleeping for 2 minutes, see you soon ;)'
         time.sleep(2 * 60)
 
-if __file__ == 'main':
+if __name__ == '__main__':
     main()
