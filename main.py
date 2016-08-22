@@ -48,6 +48,7 @@ class LivingPlantView(object):
         """Create the LivingPlantView."""
         engine = sqlalchemy.create_engine(URL(**DATABASE))
         self.session = sessionmaker(bind=engine)
+        # Create table if it doesnt exist.
         Base.metadata.create_all(engine)
 
         self.model = Plant()
@@ -87,11 +88,11 @@ class LivingPlantView(object):
         data = dict(
             measured_at=datetime.fromtimestamp(float(time)),
             name=time,
-            ambient_temperature=temperature or None,
-            ambient_humidity=float(humidity) or None,
+            ambient_temperature=float(temperature) if temperature else None,
+            ambient_humidity=float(humidity) if humidity else None,
             soil_humidity=float(avg_humid_percentage)
         )
-        item = self.process_item(data)
+        self.process_item(data)
 
     def take_ambient_values(self):
         """
