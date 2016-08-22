@@ -94,7 +94,7 @@ class LivingPlantView(object):
             print("Last valid input: " + str(datetime.now()))
             print("Temperature: %d C" % result.temperature)
             print("Humidity: %d %%" % result.humidity)
-            return result.temperature, result.prime
+            return result.temperature, result.humidity
 
     def take_soil_values(self):
         """
