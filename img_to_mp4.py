@@ -1,7 +1,9 @@
+#! /usr/local/bin/python
 """Turn images to mp4 file."""
 import cv2
 
 import os
+import sys
 import shutil as files
 import datetime
 from glob import glob  # ohmyglob
@@ -61,4 +63,7 @@ def create_the_video():
     print 'video processed'
 
 if __name__ == '__main__':
+    user_args = sys.argv[1:]
+    import ipdb; ipdb.set_trace()  # breakpoint 10482594 //
+
     create_the_video()
