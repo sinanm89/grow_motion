@@ -24,7 +24,7 @@ glob_files = sorted(glob('{img_path}/{img_regex}'.format(
 )))
 print 'found {} files'.format(len(glob_files))
 # while glob_files:
-    # 24*60*0.5=720 pictures/day so a bit above 1 day
+# 24*60*0.5=720 pictures/day so a bit above 1 day
 if len(glob_files) > 1000:
     # get the last 1000 files
     glob_files = glob_files[-1000:]
@@ -44,24 +44,18 @@ codec = cv2.cv.CV_FOURCC(*'H264')
 video = cv2.VideoWriter(
     "{}-video.mp4".format(epoch_now),  # Filename
     codec,  # Negative 1 denotes manual codec selection. You can make this automatic by defining the "fourcc codec" with "cv2.VideoWriter_fourcc"
-    30,  # 30 frames per second is chosen as a demo, 30FPS and 60FPS is more typical for a YouTube video
+    25,  # 30 frames per second is chosen as a demo, 30FPS and 60FPS is more typical for a YouTube video
     (width, height)  # The width and height come from the stats of image1
 )
 print 'created video'
 for f in glob_files:
     # process file onto variable
     # image = Image.open(f)
-    img=cv2.imread(f)
+    img = cv2.imread(f)
     # Conversion from PIL to OpenCV from: http://blog.extramaster.net/2015/07/python-converting-from-pil-to-opencv-2.html
     video.write(img)
     # archive file
-
-
-
-    # files.move(f, export_directory)
-
-
-
+    files.move(f, export_directory)
 print 'files processed'
 
 # Release the video for it to be committed to a file
