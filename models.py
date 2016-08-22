@@ -2,7 +2,8 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+metadata = MetaData()
+Base = declarative_base(metadata=metadata)
 
 
 class Plant(Base):
