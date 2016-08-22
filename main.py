@@ -64,7 +64,7 @@ class LivingPlantView(object):
         This method is called for every item pipeline component.
 
         """
-        session = self.Session()
+        session = self.session()
         deal = Plant(**item)
 
         try:
@@ -82,8 +82,8 @@ class LivingPlantView(object):
         avg_humid_percentage, time = self.take_soil_values()
         temperature, humidity = self.take_ambient_values()
         data = dict(
-            measured_at=time,
-            name=datetime.fromtimestamp(time),
+            measured_at=datetime.fromtimestamp(float(time)),
+            name=time,
             ambient_temperature=temperature or None,
             ambient_humidity=float(humidity) or None,
             soil_humidity=float(avg_humid_percentage)
