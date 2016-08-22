@@ -107,6 +107,7 @@ class LivingPlantView(object):
             print("Temperature: %d C" % result.temperature)
             print("Humidity: %d %%" % result.humidity)
             return result.temperature, result.humidity
+        return None, None
 
     def take_soil_values(self):
         """
