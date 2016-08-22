@@ -1,7 +1,7 @@
-u"""
+"""
 Alembic stuff here.
 
-➜  grow_motion git:(master) ✗ alembic revision --autogenerate -m "added table."
+$ grow_motion git:(master) > alembic revision --autogenerate -m "added table."
 """
 from __future__ import with_statement
 from alembic import context
