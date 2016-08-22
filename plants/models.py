@@ -1,5 +1,5 @@
 """Plant information model."""
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String, Float, DateTime, Sequence
 
 from generic_model import Base
 
@@ -8,7 +8,7 @@ class Plant(Base):
     """Main plant database."""
 
     __tablename__ = 'plant'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, Sequence('plant_id_seq'), primary_key=True)
     measured_at = Column(DateTime(timezone=True))
     ambient_temperature = Column(Integer, nullable=True)
     name = Column(String(255), nullable=True)
