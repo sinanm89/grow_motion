@@ -1,5 +1,5 @@
 """Plant information model."""
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String, Float, DateTime, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -9,6 +9,7 @@ class Plant(Base):
     """Main plant database."""
 
     __tablename__ = 'plant'
+    metadata = MetaData(),
     id = Column(Integer, primary_key=True)
     measured_at = Column(DateTime(timezone=True))
     ambient_temperature = Column(Integer, nullable=True)
