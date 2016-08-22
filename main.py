@@ -20,12 +20,16 @@ import picamera
 from dht11.dht11 import DHT11
 import RPi.GPIO as GPIO
 
+from models import Plant
+from local_settings import DATABASE
 cwd = os.getcwd()
+import ipdb; ipdb.set_trace()  # breakpoint 3f974186 //
+
 settings = imp.load_source(
     'grow_motion.local_settings', os.path.join(cwd, "local_settings.py"))
-models = imp.load_source(
-    'grow_motion.models', os.path.join(cwd, "models.py"))
-Plant = models.Plant
+# models = imp.load_source(
+    # 'grow_motion.models', os.path.join(cwd, "models.py"))
+# Plant = models.Plant
 
 
 class LivingPlantView(object):
@@ -50,9 +54,9 @@ class LivingPlantView(object):
 
     def __init__(self):
         """Create the LivingPlantView."""
-        engine = sqlalchemy.create_engine(URL(**settings.DATABASE))
+        engine = sqlalchemy.create_engine(URL(**DATABASE))
         self.session = sessionmaker(bind=engine)
-
+        self.model = Plant()
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.cleanup()
