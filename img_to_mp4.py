@@ -9,7 +9,7 @@ import datetime
 from glob import glob  # ohmyglob
 
 
-def create_the_video():
+def create_the_video(debug_mode):
     """Create images into an html5 video."""
     cwd = os.getcwd()
     print "cwd is : " + cwd
@@ -55,7 +55,8 @@ def create_the_video():
         # Conversion from PIL to OpenCV from: http://blog.extramaster.net/2015/07/python-converting-from-pil-to-opencv-2.html
         video.write(img)
         # archive file
-        files.move(f, export_directory)
+        if not debug_mode:
+            files.move(f, export_directory)
     print 'moved files'
 
     # Release the video for it to be committed to a file
@@ -63,7 +64,6 @@ def create_the_video():
     print 'video processed'
 
 if __name__ == '__main__':
-    user_args = sys.argv[1:]
-    import ipdb; ipdb.set_trace()  # breakpoint 10482594 //
-
-    create_the_video()
+    import ipdb; ipdb.set_trace()  # breakpoint 1aae5380 //
+    debug = False if len(sys.argv) > 1 else True
+    create_the_video(debug)
