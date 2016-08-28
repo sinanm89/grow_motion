@@ -62,24 +62,24 @@ class LivingPlantView(object):
             print 'creating {} directory...'.format(self.DIR_NAME)
             os.makedirs(self.DIR_NAME)
 
-    def process_item(self, item):
+    def process_item(self, data):
         """Save deals in the database.
 
         This method is called for every item pipeline component.
 
         """
         session = self.session()
-        deal = Plant(**item)
+        obj = Plant(**data)
 
         try:
-            session.add(deal)
+            session.add(obj)
             session.commit()
         except:
             session.rollback()
             raise
         finally:
             session.close()
-        return item
+        return obj
 
     def read_values(self):
         """Read all values from every sensor."""
@@ -142,7 +142,7 @@ class LivingPlantView(object):
             time=now, humidity=int(avg_humid_percentage * 100))
         trial = 'took'
         try:
-           with picamera.PiCamera(resolution=(1920, 1080)) as camera:
+            with picamera.PiCamera(resolution=(1920, 1080)) as camera:
                 camera.vflip = True
                 camera.awb_mode = 'fluorescent'
                 camera.iso = 100
