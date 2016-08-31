@@ -165,14 +165,14 @@ def main():
         hour_now = datetime.now().hour
         minutes_now = datetime.now().minute
         # plant sleeps 6 hrs
-        sleeptime = (24 - hour_now + 4) if hour_now != 0 else 6
         if 4 < hour_now < 22:
-            22 - hour_now
-            sleeptime = (60 * sleeptime * 60) - (minutes_now * 60)
-            time.sleep(sleeptime)
-        plant.read_values()
-        print 'Sleeping for 2 minutes, see you soon ;)'
-        time.sleep(2 * 60)
+            plant.read_values()
+            sleeptime = 2 * 60
+            print 'Sleeping for 2 minutes, see you soon ;)'
+        else:
+            sleeptime = abs(4 - (hour_now - 24)) % 6  # hours to minutes
+            sleeptime = (sleeptime * 60) - minutes_now  # minutes total
+        time.sleep(sleeptime)
 
 if __name__ == '__main__':
     main()
