@@ -144,8 +144,9 @@ class LivingPlantView(object):
         try:
             with picamera.PiCamera(resolution=(1920, 1080)) as camera:
                 camera.vflip = True
-                camera.awb_mode = 'fluorescent'
-                camera.iso = 100
+                camera.awb_mode = 'sunlight'
+                camera.contrast = 30
+                camera.sharpness = 100
                 time.sleep(2)
                 camera.capture('{0}/{1}'.format(self.DIR_NAME, pic_name))
         except picamera.exc.PiCameraError:
