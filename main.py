@@ -140,7 +140,6 @@ class LivingPlantView(object):
         now = datetime.now().strftime('%s')
         pic_name = '{time}_0{humidity}.jpg'.format(
             time=now, humidity=int(avg_humid_percentage * 100))
-        trial = 'took'
         try:
             with picamera.PiCamera(resolution=(1920, 1080)) as camera:
                 camera.vflip = True
@@ -152,9 +151,8 @@ class LivingPlantView(object):
             print 'camera borked, moving on.'
         except Exception, e:
             print 'WOW FATAL EXCEPTION'
-            trial = 'tried'
             print e
-        print '{0} {1}'.format(trial, pic_name)
+        print 'Took {0}'.format(pic_name)
 
         return avg_humid_percentage, now
 
@@ -163,6 +161,14 @@ def main():
     """Main program."""
     plant = LivingPlantView()
     while True:
+        hour_now = datetime.now().hour
+        minutes_now = datetime.now().minute
+        # plant sleeps 6 hrs
+        sleeptime = (24 - hour_now + 4) if hour_now != 0 else 6
+        if 4 < hour_now < 22:
+            22 - hour_now
+            sleeptime = (60 * sleeptime * 60) - (minutes_now * 60)
+            time.sleep(sleeptime)
         plant.read_values()
         print 'Sleeping for 2 minutes, see you soon ;)'
         time.sleep(2 * 60)
