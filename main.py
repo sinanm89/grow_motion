@@ -171,6 +171,7 @@ def main():
             print 'Sleeping for 2 minutes, see you soon ;)'
         else:
             sleeptime = abs(4 - (hour_now - 24)) % 6  # hours to minutes
+            sleeptime = 6 if sleeptime == 0 else sleeptime
             sleeptime = (sleeptime * 60) - minutes_now  # minutes total
         time.sleep(sleeptime)
 

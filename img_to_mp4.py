@@ -8,6 +8,12 @@ import shutil
 import datetime
 from glob import glob  # ohmyglob
 
+def resize_image(image):
+    s_img = cv2.imread("smaller_image.png")
+    l_img = cv2.imread("larger_image.jpg")
+    x_offset=y_offset=50
+    l_img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1]] = s_img
+
 
 def create_the_video(debug_mode=True):
     """Create images into an html5 video."""
@@ -26,14 +32,6 @@ def create_the_video(debug_mode=True):
         img_regex='*.jpg'
     )))
     print 'found {} files'.format(len(files))
-    # 24*60*0.5=720 pictures/day so a bit above 1 day
-    leftover_files = None
-    # if len(files) > 1000:
-    #     # get the last 1000 files
-    #     glob_files = files[-1000:]
-    #     # get everything until the last thousand files
-    #     leftover_files = files[:-1000]
-
     # Grab the stats from image1 to use for the resultant video
     img = cv2.imread(files[0])
     height, width, layers = img.shape
@@ -72,7 +70,7 @@ def create_the_video(debug_mode=True):
     # Release the video for it to be committed to a file
     video.release()
     print 'Created {}'.format(filename)
-    return leftover_files
+    return True
 
 if __name__ == '__main__':
     debug = False if len(sys.argv) > 1 else True
